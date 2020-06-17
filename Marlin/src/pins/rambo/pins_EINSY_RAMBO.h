@@ -81,6 +81,21 @@
 #endif
 
 //
+// Filament Runout Sensor
+//
+#ifndef FIL_RUNOUT_PIN
+  #define FIL_RUNOUT_PIN                      62
+#endif
+
+//
+// Power Loss Detection
+//
+#ifndef POWER_LOSS_PIN
+  #define POWER_LOSS_PIN                      2
+#endif
+
+
+//
 // Steppers
 //
 #define X_STEP_PIN                            37
@@ -104,12 +119,27 @@
 #define E0_CS_PIN                             66
 
 //
+// Software SPI pins for TMC2130 stepper drivers
+//
+#if ENABLED(TMC_USE_SW_SPI)
+  #ifndef TMC_SW_MOSI
+    #define TMC_SW_MOSI                     PB15
+  #endif
+  #ifndef TMC_SW_MISO
+    #define TMC_SW_MISO                     PB14
+  #endif
+  #ifndef TMC_SW_SCK
+    #define TMC_SW_SCK                      PB13
+  #endif
+#endif
+
+//
 // Temperature Sensors
 //
 #define TEMP_0_PIN                             0  // Analog Input
 #define TEMP_1_PIN                             1  // Analog Input
 #define TEMP_BED_PIN                           2  // Analog Input
-
+#define TEMP_PROBE_PIN                         3  // Analog Input
 //
 // Heaters / Fans
 //
@@ -148,6 +178,19 @@
 #define E_MUX0_PIN                            17
 #define E_MUX1_PIN                            16
 #define E_MUX2_PIN                            78  // 84 in MK2 Firmware, with BEEPER as 78
+
+/**
+ * -------------------------------------Einsy 1.1a--------------------------------------------------------------------
+ *                        _____                                                      _____                            |
+ *      (OC3A/AIN1)PE3 5 | · · | GND                          |                   5V | · · | GND                      |
+ *                nRESET | · · | 15 PJ0(RXD3/PCINT9) (SD_DET) |(LCD_D7)(TOSC2)PG3 71 | · · | 85 PH7(T4)(LCD_D6)       |
+ *   (MOSI/PCINT2)PB2 51 | · · | 14 J1(TXD3/PCINT10)(BTN_EN2) |(LCD_D5)(TOSC1)PG4 70 | · · | 59 PF5(TMS/ADC5)(LCD_D4) |
+ *(SD_SS)(PCINT15)PJ6 77 | · · | 72 PJ2(XCK3/PCINT11)(BTN_EN1)|(LCD_RS)(XCK1)PD5  82 | · · | 61 PF7(TDI/ADC7)(LCD_EN) |
+ *    (SCK/PCINT1)PB1 52 | · · | 50 PB3(PCINT3/MISO)          |(BTN_ENC)(OC2B)PH6  9 | · · | 84 PH2(XCK2)(BEEPER)     |
+ *                        ￣￣￣                                                      ￣￣                             |
+ *                        EXP2                                                        EXP1                            |
+ * -------------------------------------------------------------------------------------------------------------------
+ */
 
 //
 // LCD / Controller
