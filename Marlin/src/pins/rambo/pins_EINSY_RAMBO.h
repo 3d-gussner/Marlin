@@ -83,7 +83,16 @@
 //
 // Filament Runout Sensor
 //
-#define FIL_RUNOUT_PIN                        62  // 62/A8
+#ifndef FIL_RUNOUT_PIN
+  #define FIL_RUNOUT_PIN                        62  // 62/A8
+#endif
+
+//
+// Power Loss Detection
+//
+#ifndef POWER_LOSS_PIN
+  #define POWER_LOSS_PIN                      6 // PE4 (OC3B/INT4)
+#endif
 
 //
 // Steppers
@@ -91,22 +100,30 @@
 #define X_STEP_PIN                            37
 #define X_DIR_PIN                             49
 #define X_ENABLE_PIN                          29
-#define X_CS_PIN                              41
+#ifndef X_CS_PIN
+  #define X_CS_PIN                              41
+#endif
 
 #define Y_STEP_PIN                            36
 #define Y_DIR_PIN                             48
 #define Y_ENABLE_PIN                          28
-#define Y_CS_PIN                              39
+#ifndef Y_CS_PIN
+  #define Y_CS_PIN                              39
+#endif
 
 #define Z_STEP_PIN                            35
 #define Z_DIR_PIN                             47
 #define Z_ENABLE_PIN                          27
-#define Z_CS_PIN                              67
+#ifndef Z_CS_PIN
+  #define Z_CS_PIN                              67
+#endif
 
 #define E0_STEP_PIN                           34
 #define E0_DIR_PIN                            43
 #define E0_ENABLE_PIN                         26
-#define E0_CS_PIN                             66
+#ifndef E0_CS_PIN
+  #define E0_CS_PIN                             66
+#endif
 
 //
 // Temperature Sensors
@@ -124,18 +141,18 @@
 #define HEATER_0_PIN                           3
 #define HEATER_BED_PIN                         4
 
+#ifndef FAN_PIN                                   // Fan 0 is Part cooling fan
+  #define FAN_PIN                              6
+#endif
+  //#define FAN_TACHO_PIN                        80 
+
 #ifndef EXTRUDER_AUTO_FAN_TEMPERATURE
-#ifndef FAN_PIN
-  #define FAN_PIN                              8
+#ifndef FAN1_PIN                                  // Fan 1 is Hotend cooling fan
+  #define FAN1_PIN                             8
+  //#define FAN1_TACHO_PIN                       79
 #endif
 #else
-  #define E0_AUTO_FAN_PIN                      8
-#endif
-  //#define FAN_TACHO                            79 
-
-#ifndef FAN1_PIN
-  #define FAN1_PIN                             6
-  //#define FAN1_TACHO                           80
+  #define E0_AUTO_FAN_PIN                      8  // set Hotend cooling fan 
 #endif
 
 //
@@ -163,6 +180,19 @@
 #define E_MUX1_PIN                            16
 #define E_MUX2_PIN                            78  // 84 in MK2 Firmware, with BEEPER as 78
 
+/**
+ * See https://github.com/ultimachine/Einsy-Rambo/blob/1.1a/board/Project%20Outputs/Schematic%20Prints_Einsy%20Rambo_1.1a.PDF
+ * -------------------------------------BTT002 V1.0-----------------------------------------------
+ *               _____                                             _____                      |
+ *          PE3 | · · | GND                                    5V | · · | GND                 |
+ *       nRESET | · · | RX3                                   PG3 | · · | PH7                 |
+ *         MOSI | · · | TX3                                   PG4 | · · | PF5                 |
+ *        SD_SS | · · | PJ2                                   PD5 | · · | PF7                 |
+ *          SCK | · · | MISO                                  PH6 | · · | PH2                 |
+ *               ￣￣                                               ￣￣                       |
+ *                P2                                                P1                        |
+ * ---------------------------------------------------------------------------------------------
+ */
 //
 // LCD / Controller
 //
