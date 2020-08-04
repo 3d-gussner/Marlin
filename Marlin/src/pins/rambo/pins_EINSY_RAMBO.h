@@ -81,6 +81,11 @@
 #endif
 
 //
+// Filament Runout Sensor
+//
+#define FIL_RUNOUT_PIN                        62  // 62/A8
+
+//
 // Steppers
 //
 #define X_STEP_PIN                            37
@@ -109,7 +114,9 @@
 #define TEMP_0_PIN                             0  // Analog Input
 #define TEMP_1_PIN                             1  // Analog Input
 #define TEMP_BED_PIN                           2  // Analog Input
-#define TEMP_PROBE_PIN                         3  // Analog Input
+#if TEMP_SENSOR_PROBE
+  #define TEMP_PROBE_PIN                         3  // Analog Input
+#endif
 
 //
 // Heaters / Fans
@@ -117,12 +124,18 @@
 #define HEATER_0_PIN                           3
 #define HEATER_BED_PIN                         4
 
+#ifndef EXTRUDER_AUTO_FAN_TEMPERATURE
 #ifndef FAN_PIN
   #define FAN_PIN                              8
 #endif
+#else
+  #define E0_AUTO_FAN_PIN                      8
+#endif
+  //#define FAN_TACHO                            79 
 
 #ifndef FAN1_PIN
   #define FAN1_PIN                             6
+  //#define FAN1_TACHO                           80
 #endif
 
 //
