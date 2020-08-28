@@ -134,6 +134,9 @@
 #if TEMP_SENSOR_PROBE
   #define TEMP_PROBE_PIN                         3  // Analog Input
 #endif
+#if TEMP_SENSOR_CHAMBER > 0
+  #define TEMP_CHAMBER_PIN                    12
+#endif
 
 //
 // Heaters / Fans
@@ -153,6 +156,15 @@
 #endif
 #else
   #define E0_AUTO_FAN_PIN                      8  // set Hotend cooling fan 
+#endif
+
+//
+// Monitor Functions
+//
+#ifdef POWER_MONITOR_VOLTAGE
+  #define POWER_MONITOR_VOLTAGE_PIN               4 //A4
+  //#define POWER_MONITOR_VOLTAGE_BED_PIN         9 //A9
+  //#define POWER_MONITOR_VOLTAGE_FIL_RUNOUT_PIN  FIL_RUNOUT_PIN
 #endif
 
 //
